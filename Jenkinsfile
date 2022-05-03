@@ -10,7 +10,7 @@ pipeline{
             stage('Build NPM Project'){
                 steps{
                     script {
-                        nodejs('Node-18.1') {
+                        nodejs('Node-16.13') {
                             sh "cd ./unit-int-tests/sahti-backend && npm i --legacy-peer-deps && npm run build"
                         }
                     }
@@ -19,7 +19,7 @@ pipeline{
             stage('Test NPM Project') {
                 steps{
                     script {
-                        nodejs('Node-18.1') {
+                        nodejs('Node-16.13') {
                             sh "cd ./unit-int-tests/sahti-backend && npm i --legacy-peer-deps && npm run test"
                         }
                     }
