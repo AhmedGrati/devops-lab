@@ -10,17 +10,19 @@ pipeline{
             stage('Build NPM Project'){
                 steps{
                     script {
-                        sh "npm --version"
+                        nodejs('Node-18.1') {
+                            sh "npm --version"
+                        }
                     }
                 }
             }
-            stage('Test NPM Project') {
-                steps{
-                    script {
-                        sh 'sudo -n docker build -t wassalni/wassalnibackend:1.0.0 .'
-                    }
-                }
-            }
+            // stage('Test NPM Project') {
+            //     steps{
+            //         script {
+            //             sh 'sudo -n docker build -t wassalni/wassalnibackend:1.0.0 .'
+            //         }
+            //     }
+            // }
             // stage('Build Docker Image') {
             //     steps{
             //         script {
