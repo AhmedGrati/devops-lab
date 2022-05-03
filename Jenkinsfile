@@ -11,7 +11,7 @@ pipeline{
                 steps{
                     script {
                         nodejs('Node-16.13') {
-                            sh "cd ./unit-int-tests/sahti-backend && ls && npm cache clean -f && rm -rf node_modules && npm i --legacy-peer-deps && ls && npm run build"
+                            sh "cd ./unit-int-tests/sahti-backend && npm cache clean -f && rm -rf node_modules && npm i --legacy-peer-deps && npm run build"
                         }
                     }
                 }
@@ -22,6 +22,17 @@ pipeline{
                         nodejs('Node-16.13') {
                             sh "cd ./unit-int-tests/sahti-backend && npm i --legacy-peer-deps && npm run test"
                         }
+                    }
+                }
+            }
+            stage('Verify Tools') {
+                steps {
+                    script {
+                        sh '''
+                            docker --version
+                            docker info
+                            docker-compose --version
+                        '''
                     }
                 }
             }
