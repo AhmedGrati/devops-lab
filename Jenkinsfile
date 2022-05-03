@@ -11,18 +11,20 @@ pipeline{
                 steps{
                     script {
                         nodejs('Node-18.1') {
-                            sh "npm --version"
+                            sh "cd ./unit-int-tests/sahti-backend && npm i --legacy-peer-deps && npm run build"
                         }
                     }
                 }
             }
-            // stage('Test NPM Project') {
-            //     steps{
-            //         script {
-            //             sh 'sudo -n docker build -t wassalni/wassalnibackend:1.0.0 .'
-            //         }
-            //     }
-            // }
+            stage('Test NPM Project') {
+                steps{
+                    script {
+                        nodejs('Node-18.1') {
+                            sh "cd ./unit-int-tests/sahti-backend && npm i --legacy-peer-deps && npm run test"
+                        }
+                    }
+                }
+            }
             // stage('Build Docker Image') {
             //     steps{
             //         script {
