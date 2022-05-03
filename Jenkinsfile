@@ -11,7 +11,7 @@ pipeline{
                 steps{
                     script {
                         nodejs('Node-16.13') {
-                            sh "cd ./unit-int-tests/sahti-backend && ls && npm i --legacy-peer-deps && ls && npm run build"
+                            sh "cd ./unit-int-tests/sahti-backend && ls && npm cache clean -f && rm -rf node_modules && npm i --legacy-peer-deps && ls && npm run build"
                         }
                     }
                 }
