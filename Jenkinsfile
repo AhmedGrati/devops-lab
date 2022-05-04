@@ -42,9 +42,10 @@ pipeline{
             }
             stage('Build Docker Image') {
                 steps{
-                    script {
-                        sh "cd ./unit-int-tests/sahti-backend"
-                        dockerImage = docker.build registry + ":latest"
+                    dir('./unit-int-tests/sahti-backend') {
+                        script {
+                            dockerImage = docker.build registry + ":latest"
+                        }
                     }
                 }
             }
