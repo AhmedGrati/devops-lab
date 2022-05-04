@@ -16,15 +16,6 @@ pipeline{
                     }
                 }
             }
-            stage('Test NPM Project') {
-                steps{
-                    script {
-                        nodejs('Node-16.13') {
-                            sh "cd ./unit-int-tests/sahti-backend && npm i --legacy-peer-deps && npm run test"
-                        }
-                    }
-                }
-            }
             stage('Verify Tools') {
                 steps {
                     script {
@@ -36,6 +27,16 @@ pipeline{
                     }
                 }
             }
+            stage('Test NPM Project') {
+                steps{
+                    script {
+                        nodejs('Node-16.13') {
+                            sh "cd ./unit-int-tests/sahti-backend && npm i --legacy-peer-deps && npm run test && npm run test:e2e"
+                        }
+                    }
+                }
+            }
+
             // stage('Build Docker Image') {
             //     steps{
             //         script {
