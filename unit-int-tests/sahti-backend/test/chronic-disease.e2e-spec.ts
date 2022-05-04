@@ -16,8 +16,8 @@ describe('Chronic Diseases Controller(e2e)', () => {
     await app.init();
   });
 
-  afterAll(async () => {
-    await app?.close();
+  afterAll(() => {
+    app?.close();
   })
 
   it('/chronic-diseases (POST)', async () => {
