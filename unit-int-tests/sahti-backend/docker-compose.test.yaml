@@ -4,17 +4,24 @@ services:
   redis-test:
     container_name: redis-test
     image: 'redis:alpine'
-    network_mode: "host"
+    env_file:
+      - .test.env
+    networks:
+      - webnet
     command:
       - redis-server
     ports:
       - ${REDIS_PORT}:${REDIS_PORT}
   postgres-test:
-    network_mode: "host"
     container_name: postgres-test
     image: postgres:12
+    networks:
+      - webnet
     env_file:
       - .test.env
     ports:
       - 5431:5432
     # command: psql -U postgres -c 'set enable_parallel_hash=off;'
+
+networks:
+  webnet: {}
