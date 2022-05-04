@@ -23,7 +23,7 @@ run_build:
   image: node:latest
   stage: build
   environment:
-    name: build
+    name: buil
   tags:
     - "ci"
   before_script:
