@@ -65,7 +65,7 @@ pipeline{
                             withCredentials([file(credentialsId: 'SAHTI_ENV', variable: 'env_file')]) {
                                 sh "cp \$env_file ."
                             }
-                            sh 'docker-compose up'
+                            sh 'docker-compose up -d'
                         }
                     }
                 }
