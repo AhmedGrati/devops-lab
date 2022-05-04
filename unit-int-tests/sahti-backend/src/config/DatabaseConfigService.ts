@@ -29,6 +29,7 @@ class DatabaseConfigService {
     const database = this.configService.get<string>('POSTGRES_DB');
     const url = `postgres://${username}:${password}@${host}:${port}/${database}`;
     const config = parse(url);
+    console.log(url);
     return {
       type: 'postgres',
       url,
