@@ -1,4 +1,4 @@
-FROM jenkins/jenkins:2.277.1-lts
+FROM jenkins/jenkins:lts
 LABEL maintainer="ahmed.grati@insat.ucar.tn"
 USER root
 
@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y apt-transport-https ca-certificates cur
     apt-get update && apt-get install -y docker-ce && \
         apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
-    curl -L "https://github.com/docker/compose/releases/download/1.22.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && \
+    curl -L "https://github.com/docker/compose/releases/download/v2.5.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && \
     chmod +x /usr/local/bin/docker-compose && \
         usermod -aG docker,staff jenkins
 # install gosu for a better su+exec command
