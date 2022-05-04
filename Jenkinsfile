@@ -62,6 +62,7 @@ pipeline{
                 steps{
                     script {
                         dir('./unit-int-tests/sahti-backend') {
+                            sh 'docker-compose down && rm .env'
                             withCredentials([file(credentialsId: 'SAHTI_ENV', variable: 'env_file')]) {
                                 sh "cp \$env_file ."
                             }
