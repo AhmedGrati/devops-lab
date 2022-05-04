@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y apt-transport-https ca-certificates cur
         "deb [arch=amd64] https://download.docker.com/linux/$(. /etc/os-release; echo "$ID") \
         $(lsb_release -cs) \
         stable" && \
-    apt-get update && apt-get install -y docker-ce && \
+    apt-get update && apt-get install -y docker-ce wget && \
         apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     curl -L "https://github.com/docker/compose/releases/download/v2.5.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && \
