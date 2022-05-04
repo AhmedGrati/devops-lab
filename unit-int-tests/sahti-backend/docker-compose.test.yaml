@@ -11,7 +11,7 @@ services:
     command:
       - redis-server
     ports:
-      - ${REDIS_PORT}:${REDIS_PORT}
+      - 6379:6379
   postgres-test:
     container_name: postgres-test
     image: postgres:12
