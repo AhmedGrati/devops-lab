@@ -58,6 +58,15 @@ pipeline{
                     }
                 }
             }
+            stage('Deploy of Docker Containers') {
+                steps{
+                    script {
+                        dir('./unit-int-tests/sahti-backend') {
+                            sh 'docker-compose up'
+                        }
+                    }
+                }
+            }
    }
 //             stage('Push Docker Image') {
 //                 steps {
