@@ -1,5 +1,9 @@
 pipeline{
-
+    environment {
+        registry = "ahmedgrati/sahti"
+        registryCredential = 'dockerhub'
+        dockerImage = ''
+    }
     agent any
    stages{
          stage('SCM Checkout'){
@@ -36,14 +40,23 @@ pipeline{
                     }
                 }
             }
-
-            // stage('Build Docker Image') {
-            //     steps{
-            //         script {
-            //             sh 'sudo -n docker build -t wassalni/wassalnibackend:1.0.0 .'
-            //         }
-            //     }
-            // }
+            stage('Build Docker Image') {
+                steps{
+                    script {
+                        sh "cd ./unit-int-tests/sahti-backend"
+                        dockerImage = docker.build registry + ":latest"
+                    }
+                }
+            }
+            stage('Push Docker Image To DockerHub Registry') {
+                steps{
+                    script {
+                        docker.withRegistry( '', registryCredential ) {
+                            dockerImage.push()
+                        }
+                    }
+                }
+            }
    }
 //             stage('Push Docker Image') {
 //                 steps {
