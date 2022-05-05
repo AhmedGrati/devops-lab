@@ -58,6 +58,9 @@ pipeline{
                     }
                 }
             }
+            stage('Approval') {
+                input 'Are you sure about deploying to prod ?'
+            }
             stage('Deploy of Docker Containers') {
                 steps{
                     script {
