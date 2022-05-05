@@ -79,6 +79,11 @@ pipeline{
                 }
             }
     }
+    post {
+        success {
+            mail to: ahmedgrati1999@gmail.com
+        }
+    }
 //             stage('Push Docker Image') {
 //                 steps {
 //                     script {
