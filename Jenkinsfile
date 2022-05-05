@@ -82,8 +82,9 @@ pipeline{
     post {
         success {
             emailext (
-                  subject: "Build Log !",
-                  body: "The build was successful  and your product is on now . Check it out on http://http://34.125.74.246:8080/",
+                  subject: "Pipeline Result!",
+                  body: "The pipeline was successful and your product is on now . Check it out on http://http://34.125.74.246:8080/",
+                  to: "ahmedgrati1999@gmail.com"
                 )
         }
     }
