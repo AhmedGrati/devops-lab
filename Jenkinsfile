@@ -59,8 +59,10 @@ pipeline{
                 }
             }
             stage('Approval') {
-                script {
-                    input 'Are you sure about deploying to prod ?'
+                steps {
+                    script {
+                        input 'Are you sure about deploying to prod ?'
+                    }
                 }
             }
             stage('Deploy of Docker Containers') {
