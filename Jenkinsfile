@@ -58,26 +58,33 @@ pipeline{
                     }
                 }
             }
-            stage('Approval') {
+            stage('Deploy Approval') {
                 steps {
                     script {
                         input 'Are you sure about deploying to prod ?'
                     }
                 }
             }
-            stage('Deploy of Docker Containers') {
-                steps{
+            stage('Deploy Tools Verification') {
+                steps {
                     script {
-                        dir('./unit-int-tests/sahti-backend') {
-                            sh 'docker-compose down && rm .env'
-                            withCredentials([file(credentialsId: 'SAHTI_ENV', variable: 'env_file')]) {
-                                sh "cp \$env_file ."
-                            }
-                            sh 'docker-compose up -d'
-                        }
+                        sh 'terraform --version'
                     }
                 }
             }
+            // stage('Deploy of Docker Containers') {
+            //     steps{
+            //         script {
+            //             dir('./unit-int-tests/sahti-backend') {
+            //                 sh 'docker-compose down && rm .env'
+            //                 withCredentials([file(credentialsId: 'SAHTI_ENV', variable: 'env_file')]) {
+            //                     sh "cp \$env_file ."
+            //                 }
+            //                 sh 'docker-compose up -d'
+            //             }
+            //         }
+            //     }
+            // }
     }
     post {
         success {
@@ -88,46 +95,4 @@ pipeline{
                 )
         }
     }
-//             stage('Push Docker Image') {
-//                 steps {
-//                     script {
-//                         withCredentials([string(credentialsId: 'docker-new-pwd', variable: 'dockerHubNewPwd')]) {
-
-//                             sh "sudo -n docker login -u wassalni -p ${dockerHubNewPwd}"
-
-//                         }
-
-//                         sh 'sudo -n docker push wassalni/wassalnibackend:1.0.0'
-//                     }
-
-//                 }
-//             }
-//             stage('Release'){
-//                 steps {
-//                     script {
-//                          def upCommand = "sudo docker-compose -f /home/ubuntu/wassalni/wasalni-docker/docker-compose.yml up -d"
-//                          sh "${upCommand}"
-//                     }
-
-//                 }
-//             }
-//    }
-//     post {
-//         success {
-//               emailext (
-//                   subject: "Build Log !",
-//                   body: "The build was successful  and your product is on now . Check it out on http://3.234.221.82:8080/",
-//                   recipientProviders: [[$class: 'DevelopersRecipientProvider']]
-//                 )
-//         }
-//         failure {
-//               emailext (
-//                   attachLog:true,
-//                   subject: "Build Log ",
-//                   body: "The build failed and your product is not on production now . To Debug it check out the last build on http://3.234.221.82:9000/job/WassalniCICD",
-//                   recipientProviders: [[$class: 'DevelopersRecipientProvider']]
-//                 )
-//         }
-//     }
-
 }
