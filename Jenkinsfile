@@ -4,7 +4,10 @@ pipeline{
         registryCredential = 'dockerhub'
         dockerImage = ''
     }
-    agent any
+   agent any
+   tools {
+       terraform 'Terraform'
+   }
    stages{
          stage('SCM Checkout'){
                 steps {
