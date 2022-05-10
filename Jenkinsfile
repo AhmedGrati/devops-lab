@@ -85,7 +85,7 @@ pipeline{
                     script {
                         withAWS(credentials: 'aws-credentials', region: 'us-east-1') {
                             withCredentials([string(credentialsId: 'postgres-credentials', usernameVariable: 'username', passwordVariable: 'password')]) {
-                                sh 'terraform apply -var postgres_password=${password} -var postgres_username=${username} -auto-approve'
+                                sh 'cd sahti-iac && terraform apply -var postgres_password=${password} -var postgres_username=${username} -auto-approve'
                             }
                         }
                     }
@@ -102,8 +102,8 @@ pipeline{
                 steps {
                     script {
                         withAWS(credentials: 'aws-credentials', region: 'us-east-1') {
-                            withCredentials([string(credentialsId: 'postgres-credentials', usernameVariable: 'username', passwordVariable: 'password')]) {
-                                sh 'terraform destroy -var postgres_password=${password} -var postgres_username=${username} -auto-approve'
+                            withCredentials([usernamePassword(credentialsId: 'postgres-credentials', usernameVariable: 'username', passwordVariable: 'password')]) {
+                                sh 'cd sahti-iac && terraform destroy -var postgres_password=${password} -var postgres_username=${username} -auto-approve'
                             }
                         }
                     }
