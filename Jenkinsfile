@@ -75,6 +75,40 @@ pipeline{
                     }
                 }
             }
+            stage('Checkout Infrastructure Code') {
+                steps {
+                    git branch: 'master', url: 'https://github.com/AhmedGrati/sahti-iac'
+                }
+            }
+            stage('Deploy Infrastructure') {
+                steps {
+                    script {
+                        withAWS(credentials: 'aws-credentials', region: 'us-east-1') {
+                            withCredentials([string(credentialsId: 'postgres-credentials', usernameVariable: 'username', passwordVariable: 'password')]) {
+                                sh 'terraform apply -var postgres_password=${password} -var postgres_username=${username} -auto-approve'
+                            }
+                        }
+                    }
+                }
+            }
+            stage('Destroy Approval') {
+                steps {
+                    script {
+                        input 'Are you sure about Destroying Your Infrastructure ?'
+                    }
+                }
+            }
+            stage('Destroy Infrastructure') {
+                steps {
+                    script {
+                        withAWS(credentials: 'aws-credentials', region: 'us-east-1') {
+                            withCredentials([string(credentialsId: 'postgres-credentials', usernameVariable: 'username', passwordVariable: 'password')]) {
+                                sh 'terraform destroy -var postgres_password=${password} -var postgres_username=${username} -auto-approve'
+                            }
+                        }
+                    }
+                }
+            }
             // stage('Deploy of Docker Containers') {
             //     steps{
             //         script {
