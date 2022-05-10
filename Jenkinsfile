@@ -3,6 +3,7 @@ pipeline{
         registry = "ahmedgrati/sahti"
         registryCredential = 'dockerhub'
         dockerImage = ''
+        POSTGRES_CRED = credentials('postgres-credentials')
     }
    agent any
    tools {
@@ -84,9 +85,7 @@ pipeline{
                 steps {
                     script {
                         withAWS(credentials: 'aws-credentials', region: 'us-east-1') {
-                            withCredentials([string(credentialsId: 'postgres-credentials', usernameVariable: 'username', passwordVariable: 'password')]) {
-                                sh 'cd sahti-iac && terraform apply -var postgres_password=${password} -var postgres_username=${username} -auto-approve'
-                            }
+                            sh 'cd sahti-iac && terraform apply -var postgres_password=$POSTGRES_CRED_PSW -var postgres_username=$POSTGRES_CRED_USR -auto-approve'
                         }
                     }
                 }
@@ -102,9 +101,7 @@ pipeline{
                 steps {
                     script {
                         withAWS(credentials: 'aws-credentials', region: 'us-east-1') {
-                            withCredentials([usernamePassword(credentialsId: 'postgres-credentials', usernameVariable: 'username', passwordVariable: 'password')]) {
-                                sh 'cd sahti-iac && terraform destroy -var postgres_password=${password} -var postgres_username=${username} -auto-approve'
-                            }
+                            sh 'cd sahti-iac && terraform destroy -var postgres_password=$POSTGRES_CRED_PSW -var postgres_username=$POSTGRES_CRED_USR-auto-approve'
                         }
                     }
                 }
