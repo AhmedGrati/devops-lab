@@ -101,7 +101,7 @@ pipeline{
                 steps {
                     script {
                         withAWS(credentials: 'aws-credentials', region: 'us-east-1') {
-                            sh 'terraform init && terraform destroy -var postgres_password=$POSTGRES_CRED_PSW -var postgres_username=$POSTGRES_CRED_USR-auto-approve'
+                            sh 'terraform init && terraform destroy -var postgres_password=$POSTGRES_CRED_PSW -var postgres_username=$POSTGRES_CRED_USR -auto-approve'
                         }
                     }
                 }
