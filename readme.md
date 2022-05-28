@@ -5,7 +5,7 @@ The Jenkins application was hosted on Google Cloud Platform(GCP) Virtual Machine
 
 Many Plugins were installed into Jenkins like NodeJS Executor, Docker, Terraform, AWS, BlueOcean, any many other plugins.
 
-For terraform code: [click on this link](#https://github.com/AhmedGrati/sahti-iac)
+For Terraform code: <a href="https://github.com/AhmedGrati/sahti-iac">click on this link</a>
 ### Continuous Integration
 1- Checkout for the specific project
 
