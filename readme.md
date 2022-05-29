@@ -33,3 +33,8 @@ For Terraform code: <a href="https://github.com/AhmedGrati/sahti-iac">click on t
 ### Application
 Access Application through Application Load Balancer of AWS
 <img src="./readme_assets/execution.png" style="display: block; margin-left: auto; margin-right: auto">
+
+## Things to Improve
+1- Add Image versioning instead of pushing as latest tag, we could use the hash of the commit as tag.
+
+2- Integrate security tools in our pipeline and transform it to DevSecOps, to increase the security of our infrastructure. e.g: Synk to scan docker images and find vulnerabilities.
