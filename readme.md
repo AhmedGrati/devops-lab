@@ -10,7 +10,7 @@ For Terraform code: <a href="https://github.com/AhmedGrati/sahti-iac">click on t
 
 2- Build the NPM project
 
-3- Execute Unit & Integration Tests
+3- Execute Unit & E2E Tests
 
 ## Continuous Deployment
 1- Build Docker Image and push it to dockerhub

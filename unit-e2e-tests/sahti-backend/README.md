@@ -41,20 +41,20 @@ npm run test
 You should see the following result:
 <img src="./readme_assets/unit-tests.png">
 
-## Run Integration Tests
+## Run E2E Tests
 ### 1- Prerequisite
-You should have docker installed on your host machine to run integration tests, because at the moment of testing, I will run a clean postgres and redis databases using docker-compose.
+You should have docker installed on your host machine to run e2e tests, because at the moment of testing, I will run a clean postgres and redis databases using docker-compose.
 
 **Note that you should have ports 5431 and 6379 available for databases on your host machine.**
 ### 2- Running Tests
 
-Before running the integration tests, I will run 2 docker container without any volumes attached, so that data would not persisted between tests and for every new running tests it will have a new clean database.
-After running the integration tests, The docker containers will be removed.
+Before running the e2e tests, I will run 2 docker container without any volumes attached, so that data would not persisted between tests and for every new running tests it will have a new clean database.
+After running the e2e tests, The docker containers will be removed.
 
 Form more details, You could check the `pretest:e2e` and `posttest:e2e` in the `package.json` file.
 
-For the moment, integration tests are made only for `chronic-disease` module, and they are located in the file `test/chronic-disease.e2e-spec.ts`.
-To run integration tests, run the following command:
+For the moment, e2e tests are made only for `chronic-disease` module, and they are located in the file `test/chronic-disease.e2e-spec.ts`.
+To run e2e tests, run the following command:
 
 ```bash
 npm run test:e2e
